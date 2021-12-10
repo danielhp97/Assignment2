@@ -14,7 +14,7 @@ CREATE TABLE `Dim_Date` (
   `EnglishDayNameOfWeek` varchar(50) DEFAULT NULL,
   `DayNumberOfMonth` int DEFAULT NULL,
   `DayNumberOfYear` int DEFAULT NULL,
-  `WeekNuberOfYear` int DEFAULT NULL,
+  `WeekNumberOfYear` int DEFAULT NULL,
   `EnglishMonthName` varchar(50) DEFAULT NULL,
   `MonthNumberOfYear` int DEFAULT NULL,
   `CalendarQuarter` int DEFAULT NULL,
