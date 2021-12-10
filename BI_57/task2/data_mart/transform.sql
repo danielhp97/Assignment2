@@ -21,7 +21,7 @@ MONTH(OrderDate), QUARTER(OrderDate), YEAR(OrderDate)
 FROM TB_SalesOrderHeader as S
 */
 
-/*Fact_internet*/
+/*Fact_internet
 SELECT CONCAT('SOL',D.SalesOrderID,'-',D.SalesOrderDetailID) as concat
 ,Year(H.OrderDate)*10000 + MONTH(H.OrderDate)* 100 + DAYOFMONTH(H.OrderDate) as Date_full
 H.OrderDate
@@ -50,4 +50,26 @@ LEFT JOIN TB_Address as A on A.AddressID=H.ShipToAddressID
 LEFT JOIN TB_Country as Co on Co.CountryID=A.CountryID
 LEFT JOIN TB_ProductSubCategory as TS on TS.ProductSubCategoryID = P.ProductSubCategoryID
 LEFT JOIN TB_ProductTopCategory as TP on TP.ProductTopCategory= TS.ProductTopCategoryID
-LIMIT 10
+*/
+
+
+/*Dim product*/
+
+SELECT P.ProductID
+,P.ProductName
+,PM.ProductModelName
+,PS.Name
+,PT.Name
+,P.StandardCost
+,P.ListPrice
+,P.SellStartDate
+,P.SellEndDate
+,CASE
+    WHEN P.SellEndDate is null THEN "Current"
+    WHEN P.SellEndDate > STR_TO_DATE('2021-09-30','%Y-%m-%d') THEN "Current"
+    ELSE "Discontinued"
+END as ProductStatus
+FROM TB_Product as P
+LEFT JOIN TB_ProductModel as PM on PM.ProductModelID = P.ProductModelID
+LEFT JOIN TB_ProductSubCategory as PS on PS.ProductSubCategoryID=P.ProductSubCategoryID
+LEFT JOIN TB_PRoductTopCategory as PT on PT.ProductTopCategory=PS.ProductTopCategoryID
