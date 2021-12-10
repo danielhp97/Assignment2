@@ -1,3 +1,7 @@
+SET FOREIGN_KEY_CHECKS = 0;
+SET UNIQUE_CHECKS = 0;
+DROP TABLE Dim_Product;
+
 CREATE TABLE `Dim_Customer` (
   `CustomerKey` int NOT NULL,
   `AccountNumber` varchar(30) NOT NULL,
@@ -34,13 +38,13 @@ CREATE TABLE `Dim_Location` (
 CREATE TABLE `Dim_Product` (
   `ProductKey` int NOT NULL,
   `ProductName` varchar(50) NOT NULL,
-  `ProductModelName` varchar(50) NOT NULL,
+  `ProductModelName` varchar(50),
   `ProductSubCategoryName` varchar(50) DEFAULT NULL,
   `ProductTopCategoryName` varchar(50) DEFAULT NULL,
   `StandardCost` decimal(13,4) NOT NULL,
   `ListPrice` decimal(13,4) NOT NULL,
   `StartDate` date NOT NULL,
-  `EndDate` date NOT NULL,
+  `EndDate` date DEFAULT NULL,
   `ProductStatus` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ProductKey`),
   KEY `PK_DimProduct` (`ProductKey`) /*!80000 INVISIBLE */
@@ -71,3 +75,6 @@ CREATE TABLE `Fact_InternetSales` (
   CONSTRAINT `FK_Location_FactInternetSales` FOREIGN KEY (`ShipToLocationKey`) REFERENCES `Dim_Location` (`LocationKey`),
   CONSTRAINT `FK_Product_FactInternetSales` FOREIGN KEY (`ProductKey`) REFERENCES `Dim_Product` (`ProductKey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+SET FOREIGN_KEY_CHECKS = 1;
+SET UNIQUE_CHECKS = 1;
