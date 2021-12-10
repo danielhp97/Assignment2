@@ -1,7 +1,7 @@
 /* scripts transformation */
 
-/*INSERT INTO Dim_Customer
-(CustomerKey, AccountNumber, FullName, Gender, Age)*/
+INSERT INTO Dim_Customer
+(CustomerKey, AccountNumber, FullName, Gender, Age)
 SELECT C.CustomerID, C.CustomerID, CONCAT(P.FirstName,P.MiddleName,P.LastName), P.Gender, TIMESTAMPDIFF(year,P.BirthDate,STR_TO_DATE('13-09-2021','%d-%m-%Y'))
 FROM TB_Customer as C
 INNER JOIN TB_Person as P on C.PersonID=P.PersonID
@@ -15,13 +15,26 @@ FROM TB_Country as C
 
 
 /*Dim_date*/
+/*Dim_date*/
 INSERT INTO Dim_Date
 (DateKey, FullDateAlternateKey, DayNumberOfWeek, EnglishDayNameOfWeek, DayNumberOfMonth, DayNumberOfYear, WeekNumberOfYear, EnglishMonthName, MonthNumberOfYear, CalendarQuarter, CalendarYear)
-SELECT YEAR(OrderDate)*10000 + MONTH(OrderDate)*100 + DAYOFMONTH(OrderDate) as DateKey, ROW_NUMBER() OVER( ORDER BY OrderDate ), WEEKDAY(OrderDate), DAYNAME(OrderDate)
-,DAYOFMONTH(OrderDate), DAYOFYEAR(OrderDate),
-WEEKOFYEAR(OrderDate), MONTHNAME(OrderDate),
-MONTH(OrderDate), QUARTER(OrderDate), YEAR(OrderDate)
-FROM TB_SalesOrderHeader as S
+WITH secondary_table as 
+(
+    SELECT distinct S.OrderDate
+    FROM TB_SalesOrderHeader as S
+)
+SELECT YEAR(sec.OrderDate)*10000 + MONTH(sec.OrderDate)*100 + DAYOFMONTH(sec.OrderDate) as DateKey
+, ROW_NUMBER() OVER( ORDER BY sec.OrderDate )
+, WEEKDAY(sec.OrderDate)
+, DAYNAME(sec.OrderDate)
+, DAYOFMONTH(sec.OrderDate)
+, DAYOFYEAR(sec.OrderDate)
+, WEEKOFYEAR(sec.OrderDate)
+, MONTHNAME(sec.OrderDate)
+, MONTH(sec.OrderDate)
+, QUARTER(sec.OrderDate)
+, YEAR(sec.OrderDate)
+FROM secondary_table as sec
 
 
 /*Fact_internet*/
