@@ -1,7 +1,6 @@
-SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'; 
 /*Dim product*/
 INSERT INTO Dim_Product
-(ProductKey, ProductName, ProductModelName, ProductSubCategoryName, ProductTopCategoryName, StandardCost, ListPrice, StartDate, EndDate, ProductStatus)
+(ProductKey, ProductName, ProductModelName, ProductSubCategoryName, ProductTopCategoryName, StandardCost, ListPrice, StartDate, EndDate, ProductStatus) /* SHOW VARIABLES LIKE 'sql_mode' ;*/
 
 SELECT P.ProductID
 ,P.ProductName
@@ -11,7 +10,7 @@ SELECT P.ProductID
 ,P.StandardCost
 ,P.ListPrice
 ,P.SellStartDate
-,P.SellEndDate
+,SellEndDate
 ,CASE
     WHEN P.SellEndDate is null THEN "Current"
     WHEN P.SellEndDate > STR_TO_DATE('2021-09-30','%Y-%m-%d') THEN "Current"

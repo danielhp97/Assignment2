@@ -1,6 +1,7 @@
 SET FOREIGN_KEY_CHECKS = 0;
 SET UNIQUE_CHECKS = 0;
 DROP TABLE Dim_Product;
+DROP TABLE Fact_InternetSales;
 
 CREATE TABLE `Dim_Customer` (
   `CustomerKey` int NOT NULL,
@@ -51,8 +52,11 @@ CREATE TABLE `Dim_Product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `Fact_InternetSales` (
   `SalesOrderLineNumber` varchar(50) NOT NULL,
+  `SalesOrderNumber`varchar(50),
   `OrderDateKey` int NOT NULL,
+  `OrderDate` date NOT NULL,
   `DueDateKey` int NOT NULL,
+  `DueDate`date NOT NULL,
   `ShipDateKey` int NOT NULL,
   `ShipDate` date DEFAULT NULL,
   `ProductKey` int NOT NULL,
@@ -68,11 +72,11 @@ CREATE TABLE `Fact_InternetSales` (
   `OrderLineShippingCost` decimal(13,4) DEFAULT NULL,
   PRIMARY KEY (`SalesOrderLineNumber`),
   KEY `PK_FactInternetSales` (`SalesOrderLineNumber`) /*!80000 INVISIBLE */,
-  KEY `FK_Customer_FactInternetSales_idx` (`CustomerKey`),
-  KEY `FK_Location_FactInternetSales_idx` (`ShipToLocationKey`),
-  KEY `FK_Product_idx` (`ProductKey`),
+  KEY `FK_Customer_FactInternetSales` (`CustomerKey`),
   CONSTRAINT `FK_Customer_FactInternetSales` FOREIGN KEY (`CustomerKey`) REFERENCES `Dim_Customer` (`CustomerKey`),
+  KEY `FK_Location_FactInternetSales` (`ShipToLocationKey`),
   CONSTRAINT `FK_Location_FactInternetSales` FOREIGN KEY (`ShipToLocationKey`) REFERENCES `Dim_Location` (`LocationKey`),
+  KEY `FK_Product_FactInternetSales` (`ProductKey`),
   CONSTRAINT `FK_Product_FactInternetSales` FOREIGN KEY (`ProductKey`) REFERENCES `Dim_Product` (`ProductKey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
