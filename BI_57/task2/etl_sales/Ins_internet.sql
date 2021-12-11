@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+SET UNIQUE_CHECKS = 0;
 INSERT INTO Fact_InternetSales
 (SalesOrderLineNumber, SalesOrderNumber, OrderDateKey, OrderDate, DueDateKey, DueDate, 
 ShipDateKey, ShipDate, ProductKey, CustomerKey, ShipToLocationKey, OrderStatus, ShipMethod,
@@ -29,4 +31,6 @@ LEFT JOIN TB_ShipMethod as S on H.ShipMethodID=S.ShipMethodID
 LEFT JOIN TB_Address as A on A.AddressID=H.ShipToAddressID
 LEFT JOIN TB_Country as Co on Co.CountryID=A.CountryID
 LEFT JOIN TB_ProductSubCategory as TS on TS.ProductSubCategoryID = P.ProductSubCategoryID
-LEFT JOIN TB_ProductTopCategory as TP on TP.ProductTopCategory= TS.ProductTopCategoryID
+LEFT JOIN TB_ProductTopCategory as TP on TP.ProductTopCategory= TS.ProductTopCategoryID;
+SET FOREIGN_KEY_CHECKS = 1;
+SET UNIQUE_CHECKS = 1;
