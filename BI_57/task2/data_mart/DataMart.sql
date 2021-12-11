@@ -2,6 +2,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 SET UNIQUE_CHECKS = 0;
 DROP TABLE Dim_Product;
 DROP TABLE Fact_InternetSales;
+DROP TABLE Dim_Location;
+DROP TABLE Dim_Customer;
+DROP TABLE Dim_Date;
 
 CREATE TABLE `Dim_Customer` (
   `CustomerKey` int NOT NULL,
@@ -70,14 +73,14 @@ CREATE TABLE `Fact_InternetSales` (
   `OrderLineProfit` decimal(13,4) DEFAULT NULL,
   `OrderLineTaxAmt` decimal(13,4) DEFAULT NULL,
   `OrderLineShippingCost` decimal(13,4) DEFAULT NULL,
-  PRIMARY KEY (`SalesOrderLineNumber`),
-  KEY `PK_FactInternetSales` (`SalesOrderLineNumber`) /*!80000 INVISIBLE */,
+  PRIMARY KEY (`SalesOrderLineNumber`)
+  /*,KEY `PK_FactInternetSales` (`SalesOrderLineNumber`) !80000 INVISIBLE ,
   KEY `FK_Customer_FactInternetSales` (`CustomerKey`),
   CONSTRAINT `FK_Customer_FactInternetSales` FOREIGN KEY (`CustomerKey`) REFERENCES `Dim_Customer` (`CustomerKey`),
   KEY `FK_Location_FactInternetSales` (`ShipToLocationKey`),
   CONSTRAINT `FK_Location_FactInternetSales` FOREIGN KEY (`ShipToLocationKey`) REFERENCES `Dim_Location` (`LocationKey`),
   KEY `FK_Product_FactInternetSales` (`ProductKey`),
-  CONSTRAINT `FK_Product_FactInternetSales` FOREIGN KEY (`ProductKey`) REFERENCES `Dim_Product` (`ProductKey`)
+  CONSTRAINT `FK_Product_FactInternetSales` FOREIGN KEY (`ProductKey`) REFERENCES `Dim_Product` (`ProductKey`)*/
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;

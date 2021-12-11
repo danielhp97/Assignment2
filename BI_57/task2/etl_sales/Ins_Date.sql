@@ -17,4 +17,4 @@ SELECT YEAR(sec.OrderDate)*10000 + MONTH(sec.OrderDate)*100 + DAYOFMONTH(sec.Ord
 , MONTH(sec.OrderDate)
 , QUARTER(sec.OrderDate)
 , YEAR(sec.OrderDate)
-FROM secondary_table as sec
+FROM secondary_table as sec;
