@@ -5,7 +5,7 @@ with table2 as
 SELECT P.ProductTopCategoryName as topcat, P.ProductSubCategoryName as sub, P.ProductModelName as model, sum(F.OrderQty) as qty
 FROM Fact_InternetSales as F
 INNER JOIN Dim_Product as P on P.ProductKey=F.ProductKey
-GROUP BY 1,3 ORDER BY 1,4 DESC
+GROUP BY 1,2,3 ORDER BY 1,4 DESC
     )
 SELECT topcat ,sub ,model, qty, ROW_NUMBER() OVER (PARTITION BY topcat) as rownumb 
 FROM table2
