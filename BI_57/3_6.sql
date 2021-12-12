@@ -5,7 +5,7 @@ with tab_2 as
 SELECT P.ProductTopCategoryName as topcategory, P.ProductSubCategoryName as subcategory, P.ProductModelName as modelname, sum(F.OrderQty) as qty
 FROM Fact_InternetSales as F
 INNER JOIN Dim_Product as P on P.ProductKey=F.ProductKey
-GROUP BY P.ProductTopCategoryName, P.ProductSubCategoryName P.ProductModelName ORDER BY P.ProductTopCategoryName, sum(F.OrderQty) DESC
+GROUP BY P.ProductTopCategoryName, P.ProductSubCategoryName, P.ProductModelName ORDER BY P.ProductTopCategoryName, sum(F.OrderQty) DESC
     )
 SELECT topcategory ,subcategory ,modelname, qty, ROW_NUMBER() OVER (PARTITION BY topcategory) as rownumber 
 FROM tab_2
