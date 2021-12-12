@@ -1,0 +1,3 @@
+Select{[Measures].Revenue}ON COLUMNS, {ORDER([ShippedTo].Country.MEMBERS,[Measures].Revenue,DESC)} ON ROWS
+From [bike_sales]
+Where [OrderDate].[Year].[2019]

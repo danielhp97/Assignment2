@@ -1,0 +1,4 @@
+Select{[Measures].Profit}ON COLUMNS, {ORDER([Product].TopCategory.MEMBERS,[Measures].Profit,DESC)} ON ROWS
+From [bike_sales]
+Where [OrderDate].[Year].[2021]
+
