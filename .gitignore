@@ -1,4 +1,4 @@
 BI_57/csv_data/*
 data-integration/*
 schema-workbench/*
-.DS_Store
+./.DS_Store
