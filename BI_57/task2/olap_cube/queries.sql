@@ -11,3 +11,7 @@ Select [Measures].[Internet Sales Amount] on Columns,
 From [Adventure Works];
 
 Select [Product].[ProductCategory].[Category] 
+
+
+
+/* 4
