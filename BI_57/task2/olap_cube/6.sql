@@ -1,19 +1,4 @@
-/* Top Cat Sub Cat Model Qty */
-/*
-with tab as 
-    (
-SELECT P.ProductTopCategoryName as topcat, P.ProductSubCategoryName as subcat, P.ProductModelName as model
-, ROW_NUMBER() OVER (PARTITION BY P.ProductTopCategoryName ORDER BY F.OrderQty ) as rownumb
-FROM Fact_InternetSales as F
-INNER JOIN Dim_Product as P on P.ProductKey=F.ProductKey
-ORDER BY F.OrderQty DESC
-    )
 
-SELECT topcat, subcat, model
-FROM tab as t
-WHERE t.rownumb <=3
-LIMIT 100
-*/
 
 with table1 as
     (
