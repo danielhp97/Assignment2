@@ -1,0 +1,4 @@
+Select{[Measures].ShippingCost}ON 0, {([OrderDate.Days].[2020].[1]),([OrderDate.Days].[2020].[2]),([OrderDate.Days].[2020].[3]),([OrderDate.Days].[2020].[4]),([OrderDate.Days].[2020].[5]),([OrderDate.Days].[2020].[6])} ON 1, {[Country].[United Kingdom]} ON 2
+From [bike_sales]
+
+Where({[ShippingType].[Cargo International]})

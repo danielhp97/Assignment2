@@ -1,5 +1,3 @@
-
-
 with table1 as
     (
 with table2 as 
@@ -15,7 +13,3 @@ FROM table2
 SELECT topcat as "Product Top Category", sub as "Product Sub Category", model as "Product Model", qty as "Quantity Sold"
 FROM table1
 WHERE rownumb<=3
-
-/*, ROW_NUMBER() OVER (PARTITION BY P.ProductTopCategoryName ORDER BY F.OrderQty ) as rownumb*
-
-topcat as "Product Top Category", sub as "Product Sub Category", model as "Product Model"/
