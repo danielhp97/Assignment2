@@ -1,7 +1,7 @@
-SELECT L.Region AS reg, C.FullName as nam, sum(F.OrderQTY) as quantity,
-ROW_NUMBER() OVER(ORDER BY sum(F.OrderQTY) desc) rnk
+SELECT L.Region AS "Region", C.FullName as "Name", sum(F.OrderQTY) as "Quantity",
+ROW_NUMBER() OVER(ORDER BY sum(F.OrderQTY) desc) as "Rank"
 FROM Fact_InternetSales as F
 LEFT JOIN Dim_Location as L on F.ShipToLocationKey = L.LocationKey
 LEFT JOIN Dim_Customer as C on F.CustomerKey = C.CustomerKey
 WHERE L.Region = "Europe"
-GROUP BY L.Region, C.FullName
+GROUP BY 1, 2
